@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="neoruiz">
 <head>
 	<meta charset="UTF-8">
 	<title>Neo Ruiz</title>
@@ -36,6 +36,15 @@
 	<!-- Default css
 	============================================	 -->
 	<link rel="stylesheet" href="style.css">
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-84133298-1', 'auto');
+		ga('send', 'pageview');
+	</script>
 </head>
 <body class="home" data-spy="scroll" data-target=".oracle-navigation" data-offset="0" id="bodyTop">
 	<!-- ========================================
@@ -212,8 +221,7 @@
 				<div class="col-md-9">
 					<div class="user-info-details">
 						<p>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis eum enim, nam, doloremque, repellendus quam expedita quis quibusdam totam ad, labore amet iste provident tempora deleniti vitae adipisci. Culpa animi, cupiditate tenetur laudantium nemo,
-							impedit fugit magnam odio earum, molestias debitis fuga. Reprehenderit sed repellendus,
+							Born and raised in the Phippines now living in New York City. When I'm not coding you'll find me running or biking at Central Park or at home watching movies or playing video games.
 						</p>
 					</div>
 					<div class="user-skill">
@@ -512,7 +520,7 @@
 	<!-- ===================================================
 			==Start Portfolio==
 	=================================================== -->
-	<section class="portfolio section-padding" id="portfolio">
+	<section class="portfolio section-padding" id="portfolio" ng-controller="porfolioList">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3">
@@ -531,61 +539,19 @@
 						</div>
 					</div>
 					<div class="row" data-uk-grid="{controls: '#filter'}">
-						<div class="col-md-4 no-padding sm-margin" data-uk-filter="developement">
+						<div class="col-md-4 no-padding sm-margin" data-uk-filter="developement" ng-repeat="project in projectList track by $index">
 							<div class="single-portfolio-item">
 								<div class="portfolio-item-inner-container">
-									<img src="img/portfolio/portfolio-advertiser-3d.jpg" alt="portfolio-item">
+									<img src="img/portfolio/{{ project.PreviewImg || 'portfolio-default.jpg '}}" alt="portfolio-item">
 									<div class="portfolio-item-hover">
 										<div class="portfolio-item-hoverable-container">
 											<div class="hoverable-container-inner">
 												<div class="hover-text">
 													<a class="my-modal" href="#portfolio-modal">
-														Adveriser 3D
+														{{ project.Name }}
 													</a>
 													<p>
-														adMarketplace
-													</p>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 no-padding sm-margin" data-uk-filter="developement">
-							<div class="single-portfolio-item">
-								<div class="portfolio-item-inner-container">
-									<img src="img/portfolio/portfolio-amp-publisher-3d.jpg" alt="portfolio-item">
-									<div class="portfolio-item-hover">
-										<div class="portfolio-item-hoverable-container">
-											<div class="hoverable-container-inner">
-												<div class="hover-text">
-													<a class="my-modal" href="#portfolio-modal">
-														Publisher 3D
-													</a>
-													<p>
-														adMarketplace
-													</p>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 no-padding sm-margin" data-uk-filter="developement">
-							<div class="single-portfolio-item">
-								<div class="portfolio-item-inner-container">
-									<img src="img/portfolio/portfolio-amp-cockpit.jpg" alt="portfolio-item">
-									<div class="portfolio-item-hover">
-										<div class="portfolio-item-hoverable-container">
-											<div class="hoverable-container-inner">
-												<div class="hover-text">
-													<a class="my-modal" href="#portfolio-modal">
-														AMP Manager
-													</a>
-													<p>
-														adMarketplace
+														{{ project.Client }}
 													</p>
 												</div>
 											</div>
@@ -921,7 +887,7 @@
 	<!-- ===================================================
 			==Start Portfolio Modal==
 	=================================================== -->
-	<div id="portfolio-modal">
+	<div id="portfolio-modal" ng-controller="porfolioDetails">
 		<!-- Start modal navigation -->
 		<div class="modal-navigation">
 			<div class="container-fluid">
@@ -1025,19 +991,19 @@
 								<h5>Project Details</h5>
 								<ul>
 									<li>
-										<h6><span>Project name:</span> Fly on Sky</h6>
+										<h6><span>Project name:</span>{{ currentProject.Name }}</h6>
 									</li>
 									<li>
-										<h6><span>Category:</span>Construction</h6>
+										<h6><span>Category:</span>{{ currentProject.Category }}</h6>
 									</li>
 									<li>
-										<h6><span>Clients:</span> Abdus Salam</h6>
+										<h6><span>Clients:</span>{{ currentProject.Client }}</h6>
 									</li>
 									<li>
-										<h6><span>Date:</span> July 17, 2016</h6>
+										<h6><span>Date:</span>{{ currentProject.Date }}</h6>
 									</li>
 									<li>
-										<h6><span>Live url:</span> <a href="#">www.demo.com</a></h6>
+										<h6><span>Live url:</span> <a href="{{ currentProject.URL }}">{{ currentProject.URL }}</a></h6>
 									</li>
 								</ul>
 							</div>
@@ -1352,6 +1318,9 @@
 	<!-- Vendor Js
 	============================================	 -->
 	<script src="js/vendor/jquery-1.12.1.min.js"></script>
+	<!-- Angular 1 js
+	============================================	 -->
+	<script src="js/angular.min.js"></script>
 	<!-- Bootstrap js
 	============================================	 -->
 	<script src="js/bootstrap.min.js"></script>
@@ -1397,5 +1366,6 @@
 	<!-- Main js
 	============================================	 -->
 	<script src="js/main.js"></script>
+	<script src="js/angular-app.js"></script>
 </body>
 </html>
