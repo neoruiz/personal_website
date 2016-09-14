@@ -1,43 +1,60 @@
 angular.module('neoruiz',[])
-.service('portfolioService',function(){
+.directive( 'bindPortfolioModal', function() {
+    return function( scope, element, atts ){
+         $(element).find('.my-modal').animatedModal({
+            modalTarget: 'portfolio-modal',
+            animatedIn: 'lightSpeedIn',
+            animatedOut: 'bounceOutDown',
+            color: '#fff'
+
+        });
+    };
+})
+.controller( 'websiteBody', function( $scope ) {
     var projects = [
         {
             Name : 'Advertiser 3D',
             Category : 'Web App',
+            FilterCategory : 'webapp',
             Client : 'adMarketplace',
             URL : 'admarketplace.com',
             Date : '2016',
-            PreviewImg : 'portfolio-advertiser-3d.jpg'
+            PreviewImg : 'portfolio-advertiser-3d.jpg',
+            Description : 'Advertiser facing UI tool used for campaign management and reporting.'
         },
         {
             Name : 'Publisher 3D',
             Category : 'Web App',
+            FilterCategory : 'webapp',
             Client : 'adMarketplace',
             URL : 'admarketplace.com',
             Date : '2016',
             PreviewImg : 'portfolio-amp-publisher-3d.jpg',
-            Description : ''
+            Description : 'Publisher facing UI tool used for reporting.'
         },
         {
             Name : 'AMP Manager',
             Category : 'Web App',
+            FilterCategory : 'webapp',
             Client : 'adMarketplace',
             URL : 'admarketplace.com',
             Date : '2016',
             PreviewImg : 'portfolio-amp-cockpit.jpg',
-            Description : ''
+            Description : 'adMarketplace internal UI tool.'
         },
         {
             Name : 'AMP Mobile App',
             Category : 'Mobile App',
+            FilterCategory : 'mobileapp',
             Client : 'adMarketplace',
             URL : 'admarketplace.com',
             Date : '2016',
-            Description : ''
+            Description : 'Internal Mobile Application used for tracking nearly realtime performance'
         },
         {
             Name : 'Network Based Testmanship',
             Category : 'Desktop App',
+            FilterCategory : 'others',
             Client : 'AHRC',
             URL : 'http://amerihealthreview.com/',
             Date : '2016',
@@ -46,6 +63,7 @@ angular.module('neoruiz',[])
         {
             Name : 'Newsletter Subscription',
             Category : 'Mobile App',
+            FilterCategory : 'mobileapp',
             Client : 'Bodyworks Rehab',
             URL : 'http://amerihealthreview.com/',
             Date : '2016',
@@ -54,6 +72,7 @@ angular.module('neoruiz',[])
         {
             Name : 'Newsletter Signup',
             Category : 'Mobile App',
+            FilterCategory : 'mobileapp',
             Client : 'Bodyworks Rehab',
             URL : 'http://amerihealthreview.com/',
             Date : '2016',
@@ -61,7 +80,7 @@ angular.module('neoruiz',[])
         }
     ];
 
-    var getProjects = function( idx ){
+    function getProjects( idx ){
 
         if ( typeof idx === 'number' ){
             return projects[ idx ];
@@ -71,13 +90,10 @@ angular.module('neoruiz',[])
         
     };
 
-    return {
-        getProjects : getProjects
+    $scope.changeCurrentProject = function( index ){
+        $scope.currentProject = getProjects( index );
     };
-})
-.controller('porfolioList', function($scope, portfolioService) {
-    $scope.projectList = portfolioService.getProjects();
-})
-.controller('porfolioDetails', function($scope, portfolioService) {
-    $scope.currentProject = portfolioService.getProjects(0);
+    
+    $scope.projectList = getProjects();
+    $scope.currentProject = getProjects(0);
 });

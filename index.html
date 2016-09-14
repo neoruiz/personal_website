@@ -46,7 +46,7 @@
 		ga('send', 'pageview');
 	</script>
 </head>
-<body class="home" data-spy="scroll" data-target=".oracle-navigation" data-offset="0" id="bodyTop">
+<body class="home" data-spy="scroll" data-target=".oracle-navigation" data-offset="0" id="bodyTop" ng-controller="websiteBody">
 	<!-- ========================================
 		==Start Preloader==
 	======================================== -->
@@ -221,7 +221,7 @@
 				<div class="col-md-9">
 					<div class="user-info-details">
 						<p>
-							Born and raised in the Phippines now living in New York City. When I'm not coding you'll find me running or biking at Central Park or at home watching movies or playing video games.
+							Born and raised in the Phippines now living in New York City. When I'm not coding you'll find me running or biking at Central Park or at home watching movies or playing video games. Marathoner. Spartan. Aspiring Triathlete
 						</p>
 					</div>
 					<div class="user-skill">
@@ -337,7 +337,7 @@
 						<ul class="timeline">
 							<li>
 								<div class="timeline-time-container">
-									<h6>1 Years</h6>
+									<h6>1 Year</h6>
 									<p>2015-2016</p>
 								</div>
 								<div class="timeline-dot"></div>
@@ -520,7 +520,7 @@
 	<!-- ===================================================
 			==Start Portfolio==
 	=================================================== -->
-	<section class="portfolio section-padding" id="portfolio" ng-controller="porfolioList">
+	<section class="portfolio section-padding" id="portfolio">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3">
@@ -533,20 +533,21 @@
 						<div class="portfolio-filter-menu">
 							<ul id="filter">
 								<li class="uk-active" data-uk-filter=""><a href="">All</a></li>
-								<li data-uk-filter="developement"><a href="">Developement</a></li>
-								<li data-uk-filter="illustration"><a href="">Illustration</a></li>
+								<li data-uk-filter="webapp"><a href="">Web App</a></li>
+								<li data-uk-filter="mobileapp"><a href="">Mobile App</a></li>
+								<li data-uk-filter="others"><a href="">Others</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="row" data-uk-grid="{controls: '#filter'}">
-						<div class="col-md-4 no-padding sm-margin" data-uk-filter="developement" ng-repeat="project in projectList track by $index">
+						<div class="col-md-4 no-padding sm-margin" data-uk-filter="{{ project.FilterCategory }}" ng-repeat="project in projectList track by $index" bind-portfolio-modal>
 							<div class="single-portfolio-item">
 								<div class="portfolio-item-inner-container">
 									<img src="img/portfolio/{{ project.PreviewImg || 'portfolio-default.jpg '}}" alt="portfolio-item">
 									<div class="portfolio-item-hover">
 										<div class="portfolio-item-hoverable-container">
 											<div class="hoverable-container-inner">
-												<div class="hover-text">
+												<div class="hover-text" ng-click="changeCurrentProject($index);">
 													<a class="my-modal" href="#portfolio-modal">
 														{{ project.Name }}
 													</a>
@@ -887,7 +888,7 @@
 	<!-- ===================================================
 			==Start Portfolio Modal==
 	=================================================== -->
-	<div id="portfolio-modal" ng-controller="porfolioDetails">
+	<div id="portfolio-modal">
 		<!-- Start modal navigation -->
 		<div class="modal-navigation">
 			<div class="container-fluid">
@@ -977,8 +978,7 @@
 											</li>
 											<li>
 												<p>
-													Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et possimus tenetur veniam fugiat neque, nesciunt, reiciendis modi eveniet molestiae a omnis nulla. Sint ab inventore facilis repellat quo, quasi non harum quos quisquam reprehenderit totam quia
-													eius minima voluptates quam voluptate nostrum. Laboriosam laborum corporis, ab quam sit repudiandae! Nulla similique consequatur quo officia iusto!
+													{{ currentProject.Description }}
 												</p>
 											</li>
 										</ul>
