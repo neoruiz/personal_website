@@ -672,6 +672,26 @@ button:focus{
 .skill .progress:nth-child(4) .progress-bar {
   background: #eee;
 }
+
+/* -- custom -- */
+.skill-list-container {
+	margin-top : 5px;
+}
+
+.skill-list li {
+	float : left;
+	margin-right : 15px;
+	color: #999;
+    font-family: "Open Sans",sans-serif;
+    font-size: 14px;
+    line-height: 28px;
+}
+
+.skill-list li:before {
+	content : '∙';
+	margin-right : 5px;
+}
+
 /*================================================
 			==End About Me==
 ===============================================*/
@@ -769,6 +789,16 @@ button:focus{
 	font-family: "Open Sans",sans-serif;
 	font-size: 14px;
 	line-height: 24px;
+}
+
+.timeline-details-list li {
+	float: left;
+    margin-bottom: 12px;
+    width: 100%;
+	color: #999;
+    font-family: "Open Sans",sans-serif;
+    font-size: 14px;
+    line-height: 24px;
 }
 
 /*================================================
@@ -2293,6 +2323,10 @@ canvas {
 	.timeline li {
 		margin-bottom: 55px;
 	}
+	.timeline-details-list li {
+		margin-bottom: 12px;
+		width: 100%;
+	}
 	.home-material .banner-content h2 {
 		font-size: 49px;
 	}
@@ -2373,6 +2407,12 @@ canvas {
 		margin-top: 0px;
 		width: 78%;
 	}
+
+	.timeline-details-list li {
+		margin-bottom: 12px;
+		width: 100%;
+	}
+
 	.timeline-time-container {
 		left: 23%;
 		margin-top: -1px;
